@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import NotesPage from "./pages/NotesPage";
 import Navbar from "./components/Navbar";
 import Protected from "./components/Protected";
+import Profile from "./pages/Profile";
 
 
 const PublicRoute = ({ children }) => {
@@ -36,8 +37,9 @@ function App() {
 
             <Route element={<Protected />}>
               <Route path="/" element={<NotesPage />} />
+               <Route path="/profile" element={<Profile />} />
             </Route>
-
+            
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </BrowserRouter>

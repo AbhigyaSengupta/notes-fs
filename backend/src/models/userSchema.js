@@ -29,7 +29,12 @@ const userSchema = new mongoose.Schema({
     token : {
         type : String,
         default : null
-    }
+    },
+
+    profileImage: {
+        type: String,
+        default: "",
+    },
        
 })
 

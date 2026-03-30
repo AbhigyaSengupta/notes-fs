@@ -14,19 +14,26 @@ const Navbar = () => {
     <nav className="backdrop-blur-md bg-white/80 shadow-lg border-b border-gray-200/50 sticky top-0 z-50">
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-
           <Link to="/" className="text-2xl font-bold text-gray-900">
             📝 Notes
           </Link>
 
           <div className="flex items-center gap-3">
-
-            <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
-              <span className="text-white text-sm font-bold uppercase">
-                {shortName}
-              </span>
-            </div>
-
+            <Link to="/profile">
+              <div className="w-10 h-10 rounded-full overflow-hidden bg-blue-600 flex items-center justify-center">
+                {user?.profileImage ? (
+                  <img
+                    src={user.profileImage}
+                    alt={user.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-white text-sm font-bold uppercase">
+                    {shortName}
+                  </span>
+                )}
+              </div>
+            </Link>
 
             <span className="text-sm font-medium text-gray-700 hidden sm:block">
               {user?.name}
@@ -39,7 +46,6 @@ const Navbar = () => {
               Logout
             </button>
           </div>
-
         </div>
       </div>
     </nav>

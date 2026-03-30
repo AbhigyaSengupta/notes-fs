@@ -4,6 +4,8 @@ import cors from "cors";
 import userRoute from "./src/routes/userRoutes.js";
 import noteRoute from "./src/routes/noteroute.js";
 import { dbConnect } from "./src/config/dbConfig.js";
+import "./src/config/cloudinary.js"
+
 
 dotenv.config();
 
@@ -27,3 +29,6 @@ dbConnect();
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
+
+
+console.log("Server boot complete");

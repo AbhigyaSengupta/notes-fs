@@ -1,14 +1,17 @@
 import noteSchema from "../models/noteSchema.js";
 
+
 export const createNote = async (req, res) => {
   try {
     const { title, description } = req.body;
+    const imageUrl = req.file ? req.file.path : "";
     const createdNote = await noteSchema.create({
       title: title,
       description: description,
+      image: imageUrl,
       userId: req.userId,
     });
-
+    
     return res.status(201).json({
       success: true,
       message: "Note created successfully!",
@@ -33,16 +36,17 @@ export const getNotes = async (req, res) => {
     // const totalNotes = await noteSchema.countDocuments({ userId: req.userId });
 
     const filter = {
-      userId: req.userId,  
+      userId: req.userId,
       ...(search && {
         $or: [
           { title: { $regex: search, $options: "i" } },
-          { description: { $regex: search, $options: "i" } }
-        ]
-      })
+          { description: { $regex: search, $options: "i" } },
+        ],
+      }),
     };
     const totalNotes = await noteSchema.countDocuments(filter);
-    const notes = await noteSchema.find(filter)
+    const notes = await noteSchema
+      .find(filter)
       .sort({ [sortBy]: order })
       .skip(skip)
       .limit(limit);
@@ -102,15 +106,25 @@ export const updateNote = async (req, res) => {
         message: "Note's id not found!",
       });
     }
+
+    const updateData = {
+      title,
+      description,
+    };
+
+    // If an image file is uploaded, add its URL/path
+    if (req.file) {
+      updateData.image = req.file.path; // Cloudinary or disk path
+    }
+
     const updatedNote = await noteSchema.findOneAndUpdate(
       {
         _id: id,
         userId: req.userId,
       },
-      {
-        title: title,
-        description: description,
-      },
+
+      updateData,
+
       {
         new: true,
         runValidators: true,

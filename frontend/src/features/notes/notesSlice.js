@@ -10,8 +10,14 @@ const getHeaders = (token) => ({
 export const fetchNotes = createAsyncThunk(
   "notes/fetchNotes",
   async (
-    { page = 1, limit = 8, search = "", sortBy = "createdAt", order = "desc" } = {},
-    { getState, rejectWithValue }
+    {
+      page = 1,
+      limit = 8,
+      search = "",
+      sortBy = "createdAt",
+      order = "desc",
+    } = {},
+    { getState, rejectWithValue },
   ) => {
     try {
       const { token } = getState().auth;
@@ -30,48 +36,53 @@ export const fetchNotes = createAsyncThunk(
       return res.data;
     } catch (err) {
       return rejectWithValue(
-        err.response?.data?.message || "Failed to fetch notes"
+        err.response?.data?.message || "Failed to fetch notes",
       );
     }
-  }
+  },
 );
 
 export const createNote = createAsyncThunk(
   "notes/createNote",
-  async (noteData, { getState, rejectWithValue }) => {
+  async (formData, { getState, rejectWithValue }) => {
     try {
       const token = getState().auth.token;
-      const res = await axios.post(
-        `${BASE}/create`,
-        noteData,
-        getHeaders(token)
-      );
+      const res = await axios.post(`${BASE}/create`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       return res.data.createdNote;
     } catch (err) {
       return rejectWithValue(
-        err.response?.data?.message || "Failed to create note"
+        err.response?.data?.message || "Failed to create note",
       );
     }
-  }
+  },
 );
 
 export const updateNote = createAsyncThunk(
   "notes/updateNote",
-  async ({ id, ...noteData }, { getState, rejectWithValue }) => {
+  async ({ id, formData }, { getState, rejectWithValue }) => {
     try {
       const token = getState().auth.token;
       const res = await axios.put(
         `${BASE}/update/${id}`,
-        noteData,
-        getHeaders(token)
-      );
+        formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return res.data.updatedNote;
     } catch (err) {
       return rejectWithValue(
-        err.response?.data?.message || "Failed to update note"
+        err.response?.data?.message || "Failed to update note",
       );
     }
-  }
+  },
 );
 
 export const deleteNote = createAsyncThunk(
@@ -83,10 +94,10 @@ export const deleteNote = createAsyncThunk(
       return id;
     } catch (err) {
       return rejectWithValue(
-        err.response?.data?.message || "Failed to delete note"
+        err.response?.data?.message || "Failed to delete note",
       );
     }
-  }
+  },
 );
 
 const notesSlice = createSlice({

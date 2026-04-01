@@ -21,12 +21,13 @@ const NoteCard = ({ note, onEdit }) => {
   };
 
   return (
-    <>
-      <div className="group bg-white hover:bg-gray-50 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 hover:border-blue-200 p-6 transition-all duration-300 h-64 flex flex-col">
+    <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+      <div className="group  hover:bg-white-50 rounded-2xl shadow-lg hover:shadow-2xl border border-gray-100 hover:border-blue-200 p-6 transition-all duration-300 h-64 flex flex-col">
         <div className="flex items-start justify-between mb-4">
           <h3 className="font-bold text-lg text-gray-900 line-clamp-1 pr-4 group-hover:text-blue-600">
             {note.title}
           </h3>
+
           <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-all">
             <button
               onClick={() => onEdit(note)}
@@ -49,7 +50,13 @@ const NoteCard = ({ note, onEdit }) => {
         <p className="text-gray-600 flex-1 line-clamp-4 mb-4 leading-relaxed">
           {note.description}
         </p>
-
+        {note.image && (
+          <img
+            src={note.image}
+            alt={note.title}
+            className="w-full h-28 object-top rounded-xl mb-3"
+          />
+        )}
         <div className="flex items-center justify-between text-xs text-gray-500 mt-auto pt-4 border-t border-gray-100">
           <span>Created {new Date(note.createdAt).toLocaleDateString()}</span>
         </div>
@@ -61,7 +68,7 @@ const NoteCard = ({ note, onEdit }) => {
         onClose={() => setShowDeleteModal(false)}
         isDeleting={loading}
       />
-    </>
+    </div>
   );
 };
 

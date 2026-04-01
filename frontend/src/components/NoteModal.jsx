@@ -72,7 +72,7 @@ const NoteModal = ({ isOpen, note, onClose }) => {
           toast.success("Note created!");
           onClose();
         } else {
-          toast.error(result.payload || "Failed to create note");
+          toast.error(result.payload || "Failed to create blog");
         }
       }
     } catch (err) {
@@ -87,7 +87,7 @@ const NoteModal = ({ isOpen, note, onClose }) => {
       <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-2xl shadow-2xl w-full max-w-lg mx-4 p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-            {note ? "Edit Note" : "Create Note"}
+            {note ? "Edit Blog" : "Create Blog"}
           </h2>
           <button
             onClick={onClose}
@@ -101,7 +101,7 @@ const NoteModal = ({ isOpen, note, onClose }) => {
           <div>
             <input
               {...register("title", { required: "Title is required" })}
-              placeholder="Note title..."
+              placeholder="Blog title..."
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
             {errors.title && (
@@ -116,7 +116,7 @@ const NoteModal = ({ isOpen, note, onClose }) => {
               {...register("description", {
                 required: "Description is required",
               })}
-              placeholder="Write your note..."
+              placeholder="Write your blog..."
               rows={5}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
             />
@@ -129,7 +129,7 @@ const NoteModal = ({ isOpen, note, onClose }) => {
 
           <div className="space-y-3 mt-4">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
-              Note Image
+              Blog's Image
             </label>
 
             <input

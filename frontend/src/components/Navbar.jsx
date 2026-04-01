@@ -7,24 +7,27 @@ import { FaMoon, FaSun } from "react-icons/fa";
 const Navbar = () => {
   const logout = useLogout();
   const { token, user } = useSelector((state) => state.auth);
-
-  if (!token) return null;
-
-  const shortName = user?.name?.slice(0, 5) || "User";
-
-  const [dark, setDark] = useState(
-    () =>
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches,
-  );
+  
+  const [dark, setDark] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) return savedTheme === "dark";
+    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
 
   useEffect(() => {
     if (dark) {
       document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   }, [dark]);
+
+  
+  if (!token) return null;
+
+  const shortName = user?.name?.slice(0, 5) || "User";
 
   return (
     <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
@@ -35,7 +38,7 @@ const Navbar = () => {
               to="/"
               className="text-2xl font-bold text-gray-900 dark:text-gray-100"
             >
-              📝 Notes
+              📝 Blogs
             </Link>
 
             <div className="flex items-center gap-3">

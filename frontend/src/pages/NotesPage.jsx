@@ -39,7 +39,7 @@ const NotesPage = () => {
         search: searchQuery,
         sortBy,
         order,
-      })
+      }),
     );
   }, [dispatch, token, currentPage, searchQuery, sortBy, order]);
 
@@ -68,7 +68,7 @@ const NotesPage = () => {
   const handleSort = (field) => {
     setSortBy(field);
     setOrder((prevOrder) =>
-      sortBy === field && prevOrder === "desc" ? "asc" : "desc"
+      sortBy === field && prevOrder === "desc" ? "asc" : "desc",
     );
     setCurrentPage(1);
   };
@@ -76,8 +76,7 @@ const NotesPage = () => {
   const nextPage = () =>
     currentPage < totalPagesFromState && setCurrentPage((p) => p + 1);
 
-  const prevPage = () =>
-    currentPage > 1 && setCurrentPage((p) => p - 1);
+  const prevPage = () => currentPage > 1 && setCurrentPage((p) => p - 1);
 
   const openNewNote = () => {
     setEditingNote(null);
@@ -108,7 +107,7 @@ const NotesPage = () => {
         <div className="text-center">
           <div className="text-2xl mb-4">⚠️</div>
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-            Failed to load notes
+            Failed to load your blogs
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
             {error || "Unknown error"}
@@ -130,7 +129,7 @@ const NotesPage = () => {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4" />
           <p className="text-lg text-gray-600 dark:text-gray-300">
-            Loading your notes...
+            Loading your blogs...
           </p>
         </div>
       </main>
@@ -140,23 +139,22 @@ const NotesPage = () => {
   return (
     <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
       <main className="max-w-6xl mx-auto px-4 py-12 bg-transparent text-gray-900 dark:text-gray-100">
-        {/* Header */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-16 gap-6">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-18 gap-5">
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">
-              Your Notes
+            <h1 className="text-5xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-6 pb-2 leading-tight">
+              Your Blogs
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl leading-relaxed">
               {notes.length === 0
-                ? "No notes yet. Create your first one!"
-                : `Showing ${notes.length} notes (Page ${currentPage} of ${totalPagesFromState})`}
+                ? "No Blogs yet. Create your first one!"
+                : `Showing ${notes.length} Blogs (Page ${currentPage} of ${totalPagesFromState})`}
             </p>
           </div>
           <button
             onClick={openNewNote}
             className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-2xl font-semibold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 whitespace-nowrap"
           >
-            + Create New Note
+            + Create New Blog
           </button>
         </div>
 
@@ -164,7 +162,7 @@ const NotesPage = () => {
         <div className="flex flex-col sm:flex-row gap-4 mb-8 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
           <input
             type="text"
-            placeholder="Search notes by title or description..."
+            placeholder="Search Blogs by title or description..."
             value={searchInput}
             onChange={handleSearch}
             className="flex-1 px-4 py-3 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-900 dark:text-gray-100"
@@ -180,7 +178,8 @@ const NotesPage = () => {
               onClick={() => handleSort("createdAt")}
               className="px-4 py-3 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 rounded-xl font-medium text-sm transition-colors"
             >
-              Date {sortBy === "createdAt" ? (order === "asc" ? "↑" : "↓") : "↕"}
+              Date{" "}
+              {sortBy === "createdAt" ? (order === "asc" ? "↑" : "↓") : "↕"}
             </button>
           </div>
         </div>
@@ -192,10 +191,10 @@ const NotesPage = () => {
               <span className="text-4xl font-bold text-blue-600">+</span>
             </div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-              No notes yet
+              No Blogs yet
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-md mx-auto">
-              Your notes will appear here once you create them.
+              Your Blogs will appear here once you create them.
             </p>
             <button
               onClick={openNewNote}

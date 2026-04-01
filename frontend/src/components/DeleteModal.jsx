@@ -11,7 +11,7 @@ const DeleteModal = ({ isOpen, onConfirm, onClose, isDeleting }) => {
         </div>
 
         <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 text-center mb-2">
-          Delete Note?
+          Delete Blog?
         </h2>
         <p className="text-gray-500 dark:text-gray-300 text-center mb-6">
           This action cannot be undone.

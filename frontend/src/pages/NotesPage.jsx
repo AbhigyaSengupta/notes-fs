@@ -103,7 +103,7 @@ const NotesPage = () => {
 
   if (error) {
     return (
-      <main className="max-w-6xl mx-auto px-4 py-12 bg-transparent text-gray-900 dark:text-gray-100">
+      <main className="bg-white dark:bg-gray-800 max-w-6xl mx-auto px-4 py-12 bg-transparent text-gray-900 dark:text-gray-100 min-h-screen min-w-full">
         <div className="text-center">
           <div className="text-2xl mb-4">⚠️</div>
           <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
@@ -125,7 +125,7 @@ const NotesPage = () => {
 
   if (loading) {
     return (
-      <main className="max-w-6xl mx-auto px-4 py-12 bg-transparent text-gray-900 dark:text-gray-100">
+      <main className="bg-white dark:bg-gray-800 max-w-6xl mx-auto px-4 py-12 bg-transparent text-gray-900 dark:text-gray-100 min-h-screen min-w-full">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4" />
           <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -137,7 +137,7 @@ const NotesPage = () => {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100">
+    <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 min-h-screen">
       <main className="max-w-6xl mx-auto px-4 py-12 bg-transparent text-gray-900 dark:text-gray-100">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-18 gap-5">
           <div>
@@ -158,7 +158,6 @@ const NotesPage = () => {
           </button>
         </div>
 
-        {/* Search + sort */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
           <input
             type="text"
@@ -184,7 +183,6 @@ const NotesPage = () => {
           </div>
         </div>
 
-        {/* Content */}
         {notes.length === 0 ? (
           <div className="text-center py-24">
             <div className="w-32 h-32 bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900 dark:to-indigo-900 rounded-3xl mx-auto mb-8 flex items-center justify-center">
@@ -211,9 +209,8 @@ const NotesPage = () => {
           </div>
         )}
 
-        {/* Pagination */}
         {totalPagesFromState > 1 && (
-          <div className="flex items-center justify-center gap-4 mt-12 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+          <div className="bg-white dark:bg-gray-800 flex items-center justify-center gap-4 mt-12 p-6  rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
             <button
               onClick={prevPage}
               disabled={currentPage === 1}

@@ -1,16 +1,13 @@
-/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 * { font-family: ui-sans-serif, system-ui, sans-serif; }
-/* ✅ Removes Chrome's built-in password eye icon */
 input::-ms-reveal,
 input::-ms-clear {
   display: none;
 }
 
-/* ✅ Removes Chrome autofill blue background too */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
 }

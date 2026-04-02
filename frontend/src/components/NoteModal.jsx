@@ -166,7 +166,7 @@ const NoteModal = ({ isOpen, note, onClose }) => {
               disabled={loading}
               className="flex-1 px-4 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 disabled:opacity-50"
             >
-              {loading ? "Saving..." : note ? "Update Note" : "Create Note"}
+              {loading ? "Saving..." : note ? "Update Blog" : "Create Blog"}
             </button>
           </div>
         </form>

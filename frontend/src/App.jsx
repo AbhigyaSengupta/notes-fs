@@ -11,7 +11,6 @@ import Navbar from "./components/Navbar";
 import Protected from "./components/Protected";
 import Profile from "./pages/Profile";
 
-
 const PublicRoute = ({ children }) => {
   const { token } = useSelector((state) => state.auth);
   return token ? <Navigate to="/notes" replace /> : children;
@@ -25,21 +24,28 @@ function App() {
           <Toaster position="top-center" reverseOrder={false} />
           <Navbar />
           <Routes>
-
             <Route
               path="/login"
-              element={<PublicRoute><Login /></PublicRoute>}
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
             />
             <Route
               path="/register"
-              element={<PublicRoute><Register /></PublicRoute>}
+              element={
+                <PublicRoute>
+                  <Register />
+                </PublicRoute>
+              }
             />
 
             <Route element={<Protected />}>
               <Route path="/" element={<NotesPage />} />
-               <Route path="/profile" element={<Profile />} />
+              <Route path="/profile" element={<Profile />} />
             </Route>
-            
+
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </BrowserRouter>
